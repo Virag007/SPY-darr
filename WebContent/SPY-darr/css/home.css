@@ -1,0 +1,99 @@
+@CHARSET "ISO-8859-1";
+body
+{
+	background-image: url("../images/im.jpg");
+	margin: 0;
+  	padding: 0; 
+ 	background-size: cover;
+}
+.footer
+{
+	position: fixed;
+	width: 100%;
+	left: 0;
+	bottom: 0;
+	background-color: black;
+	opacity: 0.8;
+	text-align: center;
+}
+.header
+{
+	position: fixed;
+	width: 100%;
+	left: 0;
+	top: 0;
+	background-color: white;
+	opacity: 0.3;
+}
+#place
+{
+	background-image: url("../icons/google.png"), url("../icons/mic.png");
+	background-repeat: no-repeat;
+	background-position: 1.6% 50%, 97% 50%;
+	text-indent: 55px;
+}
+.bt
+{
+	border: none;
+	background-color: transparent;
+	font-size: 18px;
+	transform: rotate(-90deg);
+	margin-bottom: 0.2%;
+	margin-top: 0.2%;
+	margin-left: 11%;
+	margin-right: 11%;
+	cursor: pointer;
+}
+.app
+{
+	height: 5.5%;
+	width: 5.5%;
+	padding: 12px;
+}
+.drawer
+{
+	height: auto;
+	width: 5%;
+	padding-left: 20px;
+	padding-right: 20px;
+	margin-top: 5px;
+	margin-bottom: 30px;			
+}
+input[type="text"]
+{
+	margin-top: 80px;
+	width: 50%;
+	height: 38px;
+	border-radius: 50px;
+	border: thin;
+	font-family: "Product Sans";
+	font-size: 20px;
+	color: #141f1f;
+}
+.bar
+{
+	margin-top: 4px;
+	margin-bottom: 1px;
+	height: 20px;
+	float: right;
+	cursor: pointer;
+	padding-right: 5px;
+}
+#icon
+{
+	text-align: center;
+	width: 100%;
+	margin-top: 12%;
+}
+#tab
+{
+	bottom: 0;
+	position: fixed;
+	text-align: center;
+	background-color: rgba(255, 255, 255, 0.3);
+	width: 100%
+}
+a {text-decoration: none;}
+a:link {color:transparent;text-decoration:none;}
+a:visited {color:transparent;text-decoration:none;}
+a:hover {text-decoration:none;}
