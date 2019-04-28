@@ -22,8 +22,7 @@ body
 	width: 100%;
 	left: 0;
 	top: 0;
-	background-color: white;
-	opacity: 0.3;
+	background-color: rgba(0,0,0,0.3);
 }
 #place
 {
@@ -78,6 +77,8 @@ input[type="text"]
 	float: right;
 	cursor: pointer;
 	padding-right: 5px;
+	filter: invert(100%);
+	opacity: 0.9;
 }
 #icon
 {

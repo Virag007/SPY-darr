@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<meta http-equiv="refresh" content="18;url=home.jsp" />
+<meta http-equiv="refresh" content="18;url=lockscreen.jsp" />
 <title>Booting</title>
 <style type="text/css">
 	html, body

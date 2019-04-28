@@ -1,0 +1,163 @@
+@CHARSET "ISO-8859-1";
+body
+{
+	background-image: url("../images/im.jpg");
+	margin: 0;
+  	padding: 0; 
+  	background-size: cover;
+}
+.header
+{
+	position: fixed;
+	width: 100%;
+	left: 0;
+	top: 0;
+	background-color: rgba(0,0,0,0.3);
+}
+.bar
+{
+	margin-top: 4px;
+	margin-bottom: 1px;
+	height: 20px;
+	float: right;
+	cursor: pointer;
+	padding-right: 5px;
+	filter: invert(100%);
+	opacity: 0.9;
+}
+.dropdown
+{
+	height: 4%;
+	width: 4%;
+	padding: 8px;
+}
+#action
+{
+	opacity: 0.6;
+	color: white;
+	font-size: 50px;
+	margin-left: 50%;
+	cursor: pointer;
+	bottom: 7%;
+	position: fixed;
+	animation: beat 1.6s infinite;
+	transform-origin: top
+}
+#drop
+{
+	margin-left: 5px;
+	animation: beat 1.6s infinite;
+	transform-origin: left;
+	cursor: pointer;
+	filter: invert(100%);
+}
+@keyframes beat
+{
+	0% {transform: scale(1.4, 1.4);}
+	16% {transform: scale(1.1, 1.1);}
+	33% {transform: scale(1.4, 1.4);}
+	49% {transform: scale(1.1, 1.1);}
+	100% {transform: scale(1.4, 1.4);}
+}
+.overlay 
+{
+	height: 0;
+	width: 100%;
+	position: fixed;
+	z-index: 1;
+	bottom: 0;
+	left: 0;
+	background-color: rgb(0,0,0);
+	background-color: rgba(0,0,0, 0.9);
+	overflow: hidden;
+	transition: 0.5s;
+}
+
+.overlay-content 
+{
+	position: relative;
+	top: 25%;
+	width: 100%;
+	text-align: center;
+}
+.overlay a 
+{
+	text-decoration: none;
+	color: #818181;
+}
+.overlay a:hover, .overlay a:focus {color: #f1f1f1;}
+.overlay .closebtn 
+{
+	position: absolute;
+	top: 20px;
+	right: 45px;
+	font-size: 50px;
+}
+@media screen and (max-height: 450px) 
+{
+	.overlay .closebtn 
+	{
+		font-size: 40px;
+		top: 15px;
+		right: 35px;
+	}
+}
+.drop 
+{
+	height: 0;
+	width: 100%;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	background-color: rgb(255,255,255);
+	background-color: rgba(255,255,255, 0.9);
+	overflow: hidden;
+	transition: 0.5s;
+}
+.drop-content 
+{
+	position: relative;
+	top: 25%;
+	width: 100%;
+	text-align: center;
+}
+.drop a
+{
+	text-decoration: none;
+	color: #818181;
+}
+.drop a:hover, .drop a:focus {color: black;}
+.drop .close 
+{
+	position: absolute;
+	bottom: 0;
+	right: 50%;
+	font-size: 50px;
+	transform: rotate(-90deg);
+}
+@media screen and (max-height: 450px) 
+{
+	.drop .close 
+	{
+		font-size: 40px;
+		top: 15px;
+		right: 35px;
+	}
+}
+input[type="password"]
+{
+	width: 20%;
+	border-radius: 100px;
+	height: 40px;
+	letter-spacing: 0.7em;
+	padding-left: 10px;
+	border: 2px solid grey;
+	font-size: 20px;
+	text-align: center;
+}
+#clock
+{
+	text-align: center;
+	margin-top: 8%;
+}
