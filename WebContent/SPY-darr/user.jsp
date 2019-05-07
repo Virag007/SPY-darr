@@ -26,12 +26,12 @@
   	<p class="alpha" onclick="openperson()">Virag</p>
   	<p class="alpha" onclick="closehome()">Home</p>
   	<p class="alpha" onmouseover="colourChange()" onclick="openeye()">Messages</p>
-  	<p class="beta" onclick="opennotification()">Notifications</p>
   	<p class="beta" onclick="opengraph()">Report</p>
-  	<p class="beta" onmouseover="colourChange1()" onclick="openbitcoin()">Wallet</p>
-  	<p class="beta" onclick="openuser_set()">Account Settings</p>
+  	<p class="beta" onclick="openbitcoin()">Wallet</p>
+  	<p class="beta" onmouseover="colourChange1()" onclick="openuser_set()">Account Settings</p>
+  	<p class="beta" onclick="opennotification()">Notifications</p>
   	<p class="beta" onclick="openbug()">Bug Report</p>
-  	<p class="beta" onclick="alert(parag)">Logout</p>
+  	<p class="beta" onclick="popup()">Logout</p>
   </div>
   <a href="javascript:void(0)" class="side_close" onclick="closeside()">&#10096;</a>
 </div>
@@ -337,6 +337,14 @@ function colourChange() {
 function colourChange1() {
   document.getElementById("change7").style.borderBottomRightRadius="0";
 }
+function popup() {
+  document.getElementById("pop").style.height="16%";
+  document.getElementById("pop").style.display="block";
+}
+function popdown() {
+  document.getElementById("pop").style.height="0";
+  document.getElementById("pop").style.display="none";
+}
 </script>
 <div id="tab">
 	<img class="drawer" style="filter: invert(100%);background-color: #bfbfbf" src="icons/menu.svg" onclick="openside()">
@@ -348,7 +356,7 @@ function colourChange1() {
 	<img class="drawer" id="change7" style="border-bottom: 1px solid #a6a6a6; border-bottom-right-radius: 50%;" src="icons/user_set.png" onclick="openuser_set()">
 	<img class="drawer" id="change8" src="icons/notification.svg" onclick="opennotification()">
 	<img class="drawer" id="change9" src="icons/bug.svg" onclick="openbug()">
-	<img class="drawer" src="icons/logout.svg">
+	<img class="drawer" src="icons/logout.svg" onclick="popup()">
 </div>
 <div id="myDrop" class="drop">
   <a href="javascript:void(0)" class="close" onclick="closeDrop()">&#10096;</a>
@@ -371,10 +379,15 @@ function colourChange1() {
     <img class="dropdown" src="icons/account.svg">
     <img class="dropdown" src="icons/power.svg">
   </div>
- </div>
+<div id="pop">
+	Are you sure you want to logout<br>
+	<a href="login.jsp"><button style="margin-top:30px;height:45px;width:90px;background-image:linear-gradient(#D38312,#A83279);border-radius:20px;border:none;margin-right:10px;color:white">Ok</button></a>
+	<button onclick="popdown()" style="margin-top: 30px;height:45px;width:90px;background-image:linear-gradient(#D38312,#A83279);border-radius:20px;border:none;margin-left:10px;color:white">Cancel</button>
+</div>
+</div>
 <div class="footer">
 	<button class="bt"><font color="white">&#128710;</font></button>
-	<a href="index.html"><button class="bt"><font color="white">&#11096;</font></button></a>
+	<a href="home.jsp"><button class="bt"><font color="white">&#11096;</font></button></a>
 	<button class="bt"><font color="white">&#9634;</font></button>
 </div>
 </body>

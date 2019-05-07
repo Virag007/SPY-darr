@@ -70,18 +70,6 @@ body
 	width: 4%;
 	padding: 8px;
 }
-#action
-{
-	opacity: 0.6;
-	color: white;
-	font-size: 50px;
-	margin-left: 50%;
-	cursor: pointer;
-	bottom: 7%;
-	position: fixed;
-	animation: beat 1.6s infinite;
-	transform-origin: top
-}
 #drop
 {
 	margin-left: 5px;
@@ -391,3 +379,22 @@ body
 	margin-left: 60%;
 	margin-top: -100px;
 }
+#pop
+{
+	width: 25%;
+	display: none;
+	background-image: linear-gradient(#808080, #3fada8);
+	top: 40%;
+	left: 40%;
+	position: fixed;
+	text-align: center;
+	padding: 38px 0;
+	font-size: 20px;
+	font-family: Agency FB;
+	font-weight: bold;
+	letter-spacing: 0.1em;
+	color: white;
+	border-radius: 20px;
+	box-shadow: 5px 8px 18px #888888;
+}
+button{cursor: pointer;}
