@@ -1,8 +1,7 @@
 @CHARSET "ISO-8859-1";
 body
 {
-	height: 100%;
-	width: 100%;
+	background-image: linear-gradient(rgba(255,255,255,0.4), rgba(255,255,255,0.4)), url(../images/normal.jpg);
 	margin: 0;
   	padding: 0; 
   	background-size: cover;
@@ -53,18 +52,6 @@ body
 	height: 4%;
 	width: 4%;
 	padding: 8px;
-}
-#action
-{
-	opacity: 0.6;
-	color: white;
-	font-size: 50px;
-	margin-left: 50%;
-	cursor: pointer;
-	bottom: 7%;
-	position: fixed;
-	animation: beat 1.6s infinite;
-	transform-origin: top
 }
 #drop
 {
@@ -125,112 +112,77 @@ body
 		right: 35px;
 	}
 }
-.login
+#back
 {
-	height: 63%; 
-	width: 42%; 
-	top: 20%; 
-	left: 30%; 
-	position: fixed;
+	margin-top: 30px;
+	margin-left: 35%;
 }
-.log 
+#login
 {
-	width: 0;
-	height: 100%;
+	font-family: Agency FB;
+	letter-spacing: 0.1em;
+	font-size: 15px;
+	font-weight: bold;
+}
+legend
+{
+	background-color: #efefef;
+	border: 3px solid #dcdcdc;
 	border-radius: 10px;
-	position: absolute;
-	z-index: 1;
-	top: 0;
-	right: 0;
-	background-color: rgb(255,255,255);
-	overflow: hidden;
-    border-bottom: 1px solid #e6e6e6;
+	padding: 6px 20px;
+	font-family: Agency FB;
+	font-size: 20px;
+	letter-spacing: 0.05em;
 }
-.log-content 
-{
-	position: relative;
-	width: 100%;
-	text-align: center;
+fieldset{
+	width: 400px;
+	background-color: rgba(255,255,255,0.8);
+	border: none;
+	border-radius:10px;
 }
-.cp
-{
+input[type="text"], input[type="number"], input[type="email"], input[type="password"] {
 	height: 30px;
-	width: 30px;
-	padding: 5px;
-}
-.left
-{
-	border-left: 1px solid #e6e6e6;
-	border-top: 1px solid #e6e6e6;
-	border-bottom: 1px solid #e6e6e6;
-	border-bottom-left-radius: 10px;
-	border-top-left-radius: 10px;
-	height: 99.6%;
-	width: 61%;
+	width: 250px;
+	background-color: #f0f5f5;
+	border:none;
 	text-align: center;
-	float: left;
+	font-size:14px;
+	border-radius: 20px;
 }
-.right
+input[type="number"]
 {
-	border-bottom-right-radius: 10px;
-	border-top-right-radius: 10px;
-	height: 100%;
-	width: 39%;
-	right: 0;
-	position: absolute;
-	background-image: linear-gradient(#D38312, #A83279);
-	text-align: center;
+	-moz-appearance: textfield;
 }
-.left1
-{
-	height: 100%;
-	width: 35%;
-	float: right;
-	position: absolute;
-	background-image: linear-gradient(#D38312, #A83279);
-	text-align: center;
-	padding: 10px;
-}
-.right1
-{
-	border-right: 1px solid #e6e6e6;
-	border-top: 1px solid #e6e6e6;
-	height: 100%;
-	width: 61.5%;
-	right: 0;
-	position: absolute;
-	text-align: center;
-}
-.but
-{
+input[type="submit"]{
 	border-radius: 20px;
 	border:none;
 	background-image: linear-gradient(#D38312, #A83279);
 	color: #FFFFFF;
 	font-size: 12px;
-	font-family: Agency FB;
-	font-weight: bold;
 	padding: 12px 45px;
 	letter-spacing: 1px;
 	cursor: pointer;
-	outline: none;
 }
-input[type="text"],input[type="email"],input[type="password"]
-{
+textarea{
 	height: 30px;
 	width: 250px;
 	background-color: #f0f5f5;
 	border:none;
-	overflow: hidden;
 	text-align: center;
+	font-size:14px;
+	border-radius: 20px;
+	border-bottom-right-radius:0;
+	padding-top: 10px;
+}
+.logo {
+	animation: beat 1.6s infinite;
+	position: absolute;
+}
+@keyframes beat{
+	0% {transform: scale(1.4, 1.4);}
+	16% {transform: scale(1.1, 1.1);}
+	33% {transform: scale(1.4, 1.4);}
+	49% {transform: scale(1.1, 1.1);}
+	100% {transform: scale(1.4, 1.4);}
 }
 a {text-decoration: none;}
-select
-{
-	height: 30px;
-	width: 250px;
-	background-color: #f0f5f5;
-	border:none;
-	overflow: hidden;
-	text-align: center;
-}

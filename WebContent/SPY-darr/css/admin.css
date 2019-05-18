@@ -286,30 +286,6 @@ body
 	color: #818181;
 }
 .graph a:hover, .graph a:focus {color: black;}
-.bitcoin 
-{
-	width: 0;
-	position: fixed;
-	z-index: 1;
-	top: 28px;
-	bottom: 29px;
-	left: 70px;
-	background-color: rgb(255,255,255);
-	overflow: hidden;
-	transition: 0.5s;
-}
-.bitcoin-content 
-{
-	position: relative;
-	top: 0;
-	width: 100%;
-}
-.bitcoin a
-{
-	text-decoration: none;
-	color: #818181;
-}
-.bitcoin a:hover, .bitcoin a:focus {color: black;}
 .user_set 
 {
 	width: 0;
@@ -335,30 +311,6 @@ body
 	color: #818181;
 }
 .user_set a:hover, .user_set a:focus {color: black;}
-.bug 
-{
-	width: 0;
-	position: fixed;
-	z-index: 1;
-	top: 28px;
-	bottom: 29px;
-	left: 70px;
-	background-color: rgb(255,255,255);
-	overflow: hidden;
-	background-image: linear-gradient(rgba(255,255,255,0.5), rgba(255,255,255,0.5)),url("../images/backg.jpg");
-	transition: 0.5s;
-}
-.bug-content 
-{
-	position: relative;
-	width: 100%;
-}
-.bug a
-{
-	text-decoration: none;
-	color: #818181;
-}
-.bug a:hover, .bug a:focus {color: black;}
 .box
 {
 	width: 25%;

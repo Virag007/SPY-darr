@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@page import="connection.connect" %>
+<%@page import="java.sql.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,11 +27,59 @@
 		<br><font color="#00b3b3" size="6" face="Calibri"><b>Sign In to SPY-darr</b></font><br><br>
 		<img src="icons/fb.svg" class="cp"><img src="icons/g+.svg" class="cp"><img src="icons/in.svg" class="cp">
 		<br><br><font color="#85adad" face="Calibri">or use your email account :</font><br>
-		<br><input type="text" name="username" placeholder="Email"><br><br>
-		<input type="password" name="passwd" placeholder="Password"><br><br>
+		<br>
+		<form method="post" action="login.jsp">
+		<input type="text" name="username" placeholder="Email" required><br><br>
+		<input type="password" name="passwd" placeholder="Password" required><br><br>
 		<a href="forgotpass.jsp"><font face="Calibri" color="#334d4d">Forgot Your Password?</font><br></a><hr style="width: 145px;color: #f0f5f5"><br>
-		<a href="user.jsp"><input type="submit" value="SIGN IN" class="but"></a>
+		<input type="submit" value="SIGN IN" class="but"></form>
+		<br><label style="font-family:Calibri;color:red;display:none" id="extra"><marquee>Wrong Credentials</marquee></label>
 	</div>
+	
+	<%
+	Connection con=connect.dbcon();
+	Statement st=null;
+	ResultSet rs=null;
+	String sql="SELECT * FROM status";
+	String username=request.getParameter("username");
+	String password=request.getParameter("passwd");
+	if(username==null && password==null) {}
+	else
+	{
+		st=con.createStatement();
+		rs=st.executeQuery(sql);
+		while(rs.next())
+		{
+			if(rs.getString(3).equals(username) && rs.getString(5).equals(password) && rs.getString(2).equals("admin"))
+			{
+				session.setAttribute("uname", username);
+				response.sendRedirect("admin.jsp");
+			}
+			else if(rs.getString(3).equals(username) && rs.getString(5).equals(password) && rs.getString(2).equals("user"))
+			{
+				session.setAttribute("uname", username);
+				response.sendRedirect("user.jsp");
+			}
+			else if(rs.getString(3).equals(username) && rs.getString(5).equals(password) && rs.getString(2).equals("police"))
+			{
+				session.setAttribute("uname", username);
+				response.sendRedirect("police.jsp");
+			}
+			else if(rs.getString(3).equals(username) && rs.getString(5).equals(password) && rs.getString(2).equals("ministry"))
+			{
+				session.setAttribute("uname", username);
+				response.sendRedirect("ministry.jsp");
+			}
+			else
+			{
+				%>
+				<script>document.getElementById("extra").style.display = "block";</script>
+				<%
+			}
+		}
+	}
+	%>
+	
 	<div class="right">
 		<span style="top: 35%;position: relative;color: white;font-family: Montserrat;font-size: 14px"><font size="5" face="Calibri"><b>Hello, Friends!</b></font><br><br>
 		Enter your personal details<br>
@@ -48,11 +98,69 @@
 				<br><font color="#00b3b3" size="6" face="Calibri"><b>Create Account</b></font><br><br>
 				<img src="icons/fb.svg" class="cp"><img src="icons/g+.svg" class="cp"><img src="icons/in.svg" class="cp"><br>
 				<br><font face="Calibri" color="#85adad">or use your email for registration</font><br><br>
-				<input type="text" name="Name" placeholder="Name"><br><br>
+				<form method="post" action="login.jsp">
 				<input type="email" name="Email" placeholder="Email"><br><br>
 				<input type="password" name="passwd" placeholder="Password"><br><br>
-				<input type="submit" value="SIGN UP" class="but">
+				<select name="usertype">
+                	<option selected disabled hidden>Select Usertype</option>
+                	<option>Normal User</option>
+                	<option>Police</option>   
+                	<option>Ministry</option>
+                </select><br><br>
+				<input type="submit" value="SIGN UP" class="but"></form>
 			</div>
+			<%
+			if(request.getParameter("usertype")==null){}
+			else {
+			String usertype=request.getParameter("usertype");
+			String email=request.getParameter("Email");
+			String pass=request.getParameter("passwd");
+			if(usertype.equals("Normal User"))
+			{
+				%>
+				<form action="normalreg.jsp" method="post">
+					<input type="hidden" name="sendemail1" value="<%=email%>"/>
+					<input type="hidden" name="sendpassword1" value="<%=pass%>" />
+					<input type="submit" id="qq" value="" hidden>
+				</form>
+				<script>
+				document.getElementById("extra").style.display = "none";
+				document.getElementById("qq").click();
+				</script>
+				<%
+			}
+			else if(usertype.equals("Police"))
+			{
+				%>
+				<form action="policereg.jsp" method="post">
+					<input type="hidden" name="sendemail2" value="<%=email%>"/>
+					<input type="hidden" name="sendpassword2" value="<%=pass%>" />
+					<input type="submit" id="qq" value="" hidden>
+				</form>
+				<script>
+				document.getElementById("extra").style.display = "none";
+				document.getElementById("qq").click();
+				</script>
+				<%
+			}
+			else if(usertype.equals("Ministry"))
+			{
+				%>
+				<form action="ministryreg.jsp" method="post">
+					<input type="hidden" name="sendemail3" value="<%=email%>"/>
+					<input type="hidden" name="sendpassword3" value="<%=pass%>" />
+					<input type="submit" id="qq" value="" hidden>
+				</form>
+				<script>
+				document.getElementById("extra").style.display = "none";
+				document.getElementById("qq").click();
+				</script>
+				<%
+			}
+			else
+			{}
+			}
+			%>
 		</div>
 	</div>
 </div>

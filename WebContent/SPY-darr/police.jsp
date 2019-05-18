@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>User</title>
 <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"> 
-<link rel="stylesheet" href="css/user.css">
+<link rel="stylesheet" href="css/police.css">
 <script src="js/jquery-3.2.1.js"></script>
 </head>
 <body>
@@ -45,29 +45,25 @@
 	Connection con=connect.dbcon();
 	Statement st=null;
 	ResultSet rs=null;
-	String sql="SELECT * FROM user";
+	String sql="SELECT * FROM police";
 	st=con.createStatement();
 	rs=st.executeQuery(sql);
 	String uname="";
-	String fname="";
-	String lname="";
 	String email="";
 	String phone="";
 	String loc="";
 	String pin="";
-	String bitcoin="";
+	String dept="";
 	while(rs.next())
 	{
 		if(rs.getString(2).equals(username))
 		{
 			uname=rs.getString(2);
-			fname=rs.getString(3);
-			lname=rs.getString(4);
-			email=rs.getString(5);
-			phone=rs.getString(7);
-			loc=rs.getString(8);
-			pin=rs.getString(9);
-			bitcoin=rs.getString(10);
+			email=rs.getString(3);
+			phone=rs.getString(5);
+			loc=rs.getString(6);
+			pin=rs.getString(7);
+			dept=rs.getString(8);
 		}
 		else
 			continue;
@@ -77,16 +73,15 @@
 	  	<form method="post" enctype="multipart/form-data">
 	  		<input type="file" onchange="readURL(this);" name="image" hidden id="filetoupload">
 			<img src="icons/github.png" height="130px" style="margin-left: -5%;margin-top: 120px;border-radius: 100px" width="130px" id="blah" /><label for="filetoupload" class="logo"><img src="icons/edit.png" style="cursor: pointer;margin-top: 105px" height="20px" width="18px"/></label><br><br>
-			<label style="margin-left: -5%;font-family: Montserrat"><font color="#53ff1a">&#11044;</font> <%=fname %> (@<%=username %>)</label><br><br>
+			<label style="margin-left: -5%;font-family: Montserrat"><font color="#53ff1a">&#11044;</font> <%=dept %> (@<%=username %>)</label><br><br>
 		</form>
 	</div>
 	<div style="font-family: Calibri;font-size: 20px; margin-top: 150px;text-align: left;margin-left: 30%;width: 40%">
-		FirstName: <span class="col" style="text-transform: uppercase;"><%=fname %></span> <span style="margin-left: 40px">LastName:</span> <span class="col" style="text-transform: uppercase;"><%=lname %></span><br>
+		Department <span class="col" style="text-transform: uppercase;"><%=dept %></span><br>
 		Email: <span class="col"><%=email %></span><br>
 		Phone: <span class="col"><%=phone %></span><br>
 		Address: <span class="col" style="text-transform: uppercase;"><%=loc %></span><br>
-		Pincode: <span class="col"><%=pin %></span><br>
-		Bitcoin address: <span class="col"><%=bitcoin %></span>
+		Pincode: <span class="col"><%=pin %></span><br><br>
 	</div>
 	<div style="font-family: Montserrat;top: 115%;position: absolute;margin-left: 37%;font-size: 12px">&copy; Copyright to SPY-DARR &trade; Pvt. Ltd. v1.0</div>
   </div>

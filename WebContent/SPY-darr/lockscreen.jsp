@@ -49,13 +49,22 @@
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <div class="overlay-content">
    	<p><font color="white" size="30px" face="Calibri">Type your pin</font></p><br>
-   	<form method="get" action="validate.jsp" id="form_id">
+   	<form method="post" action="lockscreen.jsp" id="form_id">
     <input type="password" id="pass" name="passwd" maxlength="4" required="Required" placeholder="&#9899;&#9899;&#9899;&#9899;">
 	</form>  
   </div>
 </div>
 <span onclick="openNav()" id="action"><p style="transform: rotate(90deg)">&#10096;</p></span>
-
+<%
+if(request.getParameter("passwd")==null){}
+else {
+String password=request.getParameter("passwd");       
+if(password.equals("9471"))
+	response.sendRedirect("home.jsp");
+else
+	response.sendRedirect("lockscreen.jsp");
+}
+%>
 <script>
 function openNav() {
   document.getElementById("myNav").style.height = "50%";
