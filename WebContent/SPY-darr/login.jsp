@@ -29,7 +29,7 @@
 		<br><br><font color="#85adad" face="Calibri">or use your email account :</font><br>
 		<br>
 		<form method="post" action="login.jsp">
-		<input type="text" name="username" placeholder="Email" required><br><br>
+		<input type="text" name="username" placeholder="Username" required><br><br>
 		<input type="password" name="passwd" placeholder="Password" required><br><br>
 		<a href="forgotpass.jsp"><font face="Calibri" color="#334d4d">Forgot Your Password?</font><br></a><hr style="width: 145px;color: #f0f5f5"><br>
 		<input type="submit" value="SIGN IN" class="but"></form>
@@ -99,10 +99,10 @@
 				<img src="icons/fb.svg" class="cp"><img src="icons/g+.svg" class="cp"><img src="icons/in.svg" class="cp"><br>
 				<br><font face="Calibri" color="#85adad">or use your email for registration</font><br><br>
 				<form method="post" action="login.jsp">
-				<input type="email" name="Email" placeholder="Email"><br><br>
-				<input type="password" name="passwd" placeholder="Password"><br><br>
-				<select name="usertype">
-                	<option selected disabled hidden>Select Usertype</option>
+				<input type="email" name="Email" placeholder="Email" required><br><br>
+				<input type="password" name="passwd" placeholder="Password" required><br><br>
+				<select name="usertype" required>
+                	<option selected disabled hidden="">Select Usertype</option>
                 	<option>Normal User</option>
                 	<option>Police</option>   
                 	<option>Ministry</option>
@@ -121,7 +121,7 @@
 				<form action="normalreg.jsp" method="post">
 					<input type="hidden" name="sendemail1" value="<%=email%>"/>
 					<input type="hidden" name="sendpassword1" value="<%=pass%>" />
-					<input type="submit" id="qq" value="" hidden>
+					<input type="submit" id="qq" value="" hidden="">
 				</form>
 				<script>
 				document.getElementById("extra").style.display = "none";
@@ -135,7 +135,7 @@
 				<form action="policereg.jsp" method="post">
 					<input type="hidden" name="sendemail2" value="<%=email%>"/>
 					<input type="hidden" name="sendpassword2" value="<%=pass%>" />
-					<input type="submit" id="qq" value="" hidden>
+					<input type="submit" id="qq" value="" hidden="">
 				</form>
 				<script>
 				document.getElementById("extra").style.display = "none";
@@ -149,7 +149,7 @@
 				<form action="ministryreg.jsp" method="post">
 					<input type="hidden" name="sendemail3" value="<%=email%>"/>
 					<input type="hidden" name="sendpassword3" value="<%=pass%>" />
-					<input type="submit" id="qq" value="" hidden>
+					<input type="submit" id="qq" value="" hidden="">
 				</form>
 				<script>
 				document.getElementById("extra").style.display = "none";

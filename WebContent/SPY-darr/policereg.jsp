@@ -29,7 +29,7 @@
 	<form id="login" enctype="multipart/form-data" action="policereg.jsp">
 		<table>
 			<tr>
-				<td align="center"><b>Profile Photo</b><input type="file" onchange="readURL(this);" name="image" hidden id="filetoupload"></td>
+				<td align="center"><b>Profile Photo</b><input type="file" onchange="readURL(this);" name="image" hidden="" id="filetoupload"></td>
 			</tr>
 			<tr>
 				<td align="center"><img src="icons/github.png" height="80px" style="margin-top:10px;border-radius:100px" width="80px" id="blah" /><label for="filetoupload" class="logo"><img src="icons/edit.png" style="cursor: pointer;margin-top:6px" height="13px" width="13px"/></label></td>
@@ -59,6 +59,10 @@
 				<td>Pincode<input type="number" name="pincode" placeholder="Pincode" style="width:230px;margin-left:95px;margin-top:10px" required></td>
 			</tr>
 			<tr>
+				<td>Geolocation<input type="number" name="lat" placeholder="Latitude" style="width:110px;margin-left:70px;margin-top:10px" required></td>
+				<td><input type="number" name="longi" placeholder="Longitude" style="width:110px;margin-left:-130px;margin-top:10px" required></td>
+			</tr>
+			<tr>
 				<td><p align="center" style="margin-top:20px;font-weight:lighter;font-family:Calibri"><font size="3">By clicking Complete, you agree to the SPY-darr User Agreement, Privacy Policy, and Cookie Policy.</font></p></td>
 			</tr>
 			<tr>
@@ -77,7 +81,9 @@ String password=request.getParameter("passwd");
 String phone=request.getParameter("phone");
 String address=request.getParameter("addr");
 String pincode=request.getParameter("pincode");
-String sql="INSERT INTO police VALUES (NULL,'"+username+"','"+email+"','"+password+"','"+phone+"','"+address+"','"+pincode+"','"+department+"')";
+String lat=request.getParameter("lat");
+String longi=request.getParameter("longi");
+String sql="INSERT INTO police VALUES (NULL,'"+username+"','"+email+"','"+password+"','"+phone+"','"+address+"','"+pincode+"','"+department+"','"+lat+"','"+longi+"')";
 String sql1="INSERT INTO status VALUES (NULL,'police','"+username+"','"+email+"','"+password+"')";
 if(username==null && email==null && password==null && phone==null && address==null && pincode==null && department==null) {}
 else

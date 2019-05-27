@@ -29,7 +29,7 @@
 	<form id="login" enctype="multipart/form-data" action="normalreg.jsp">
 		<table>
 			<tr>
-				<td align="center"><b>Profile Photo</b><input type="file" onchange="readURL(this);" name="image" hidden id="filetoupload"></td>
+				<td align="center"><b>Profile Photo</b><input type="file" onchange="readURL(this);" name="image" hidden="" id="filetoupload"></td>
 			</tr>
 			<tr>
 				<td align="center"><img src="icons/github.png" height="80px" style="margin-top:10px;border-radius:100px" width="80px" id="blah" /><label for="filetoupload" class="logo"><img src="icons/edit.png" style="cursor:pointer;margin-top:6px" height="13px" width="13px"/></label></td>
@@ -75,7 +75,7 @@
 </fieldset></div><br><br><br>
 <%
 Connection con=connect.dbcon();
-Statement st=null;
+Statement st = null;
 String username=request.getParameter("uname");
 String firstname=request.getParameter("fname");
 String lastname=request.getParameter("lname");
@@ -85,7 +85,7 @@ String phone=request.getParameter("phone");
 String address=request.getParameter("addr");
 String pincode=request.getParameter("pincode");
 String bitcoin=request.getParameter("bitcoin");
-String sql="INSERT INTO user VALUES (NULL,'"+username+"','"+firstname+"','"+lastname+"','"+email+"','"+password+"','"+phone+"','"+address+"','"+pincode+"','"+bitcoin+"')";
+String sql="INSERT INTO user VALUES (NULL,'"+username+"','"+firstname+"','"+lastname+"','"+email+"','"+password+"','"+phone+"','"+address+"','"+pincode+"','"+bitcoin+"',0)";
 String sql1="INSERT INTO status VALUES (NULL,'user','"+username+"','"+email+"','"+password+"')";
 if(username==null && firstname==null && lastname==null && email==null && password==null && phone==null && address==null && pincode==null && bitcoin==null) {}
 else

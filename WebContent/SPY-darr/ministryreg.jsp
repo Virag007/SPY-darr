@@ -29,7 +29,7 @@
 	<form id="login" enctype="multipart/form-data" action="ministryreg.jsp">
 		<table>
 			<tr>
-				<td align="center"><b>Profile Photo</b><input type="file" onchange="readURL(this);" name="image" hidden id="filetoupload"></td>
+				<td align="center"><b>Profile Photo</b><input type="file" onchange="readURL(this);" name="image" hidden="" id="filetoupload"></td>
 			</tr>
 			<tr>
 				<td align="center"><img src="icons/github.png" height="80px" style="margin-top:10px;border-radius:100px" width="80px" id="blah" /><label for="filetoupload" class="logo"><img src="icons/edit.png" style="cursor:pointer;margin-top:6px" height="13px" width="13px"/></label></td>
