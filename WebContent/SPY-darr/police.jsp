@@ -4,6 +4,8 @@
 <%@page import="java.sql.*" %>
 <%@ page import="java.util.*" %>
 <%@page import="java.lang.*" %>
+<%@ page import="com.google.gson.Gson"%>
+<%@ page import="com.google.gson.JsonObject"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +14,7 @@
 <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"> 
 <link rel="stylesheet" href="css/user.css">
 <script src="js/jquery-3.2.1.js"></script>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </head>
 <body>
 <div class="header">
@@ -98,20 +101,16 @@ String home_count=request.getParameter("status_newcount");
 String home_update="UPDATE messages SET support='"+home_count+"' WHERE mmid='"+home_index+"'";
 st.executeUpdate(home_update);
 %>
-<div id="myeye" class="eye">
-  <div class="eye-content">
-  </div>
-</div>
 <div id="mynotification" class="notification">
   <div class="notification-content">
   <div style="height:100px;background-color: #1b7fbd;display: flex;align-items: center;justify-content: center;color:white;font-family:Agency FB;font-size:40px;letter-spacing: 0.3em"><b>NOTIFICATIONS</b></div>
   	<div id="noti" style="height: 450px;display: flex;align-items: center;justify-content: center;color:#e6e6e6;font-family:Montserrat;font-size:30px;">No New Notifications</div>
  	<%
-	String[] msg_p=new String[4];
-	String[] location_p=new String[4];
-	String[] rec_from_p=new String[4];
-	String[] noti_time_p=new String[4];
-	String[] mmid_p=new String[4];
+	String[] msg_p=new String[50];
+	String[] location_p=new String[50];
+	String[] rec_from_p=new String[50];
+	String[] noti_time_p=new String[50];
+	String[] mmid_p=new String[50];
  	String noti_sql="SELECT * FROM messages";
  	String style="none";
  	String display="none";
@@ -186,14 +185,147 @@ st.executeUpdate(home_update);
 	  	%>
   </div>
 </div>
+<%
+int report_count=0,accept=0,reject=0;
+double money_bit=0,inr=0;
+ResultSet counter=st.executeQuery(noti_sql);
+while(counter.next())
+{
+	if(counter.getString(3).equals(username))
+	{
+		report_count++;
+	}
+}
+ResultSet acc=st.executeQuery(noti_sql);
+while(acc.next())
+{
+	if(acc.getString(2).equals(username) && acc.getString(8).equals("Accepted"))
+	{
+		accept++;
+	}
+	else if(acc.getString(2).equals(username) && acc.getString(8).equals("Rejected"))
+	{
+		reject++;
+	}
+	else
+		continue;
+}
+ResultSet money=st.executeQuery(noti_sql);
+while(money.next())
+{
+	if(money.getString(2).equals(username))
+	{
+		money_bit=money_bit+Double.parseDouble(money.getString(9));
+	}
+}
+inr=Math.round(money_bit*557381.15*100000d)/10000d;
+ResultSet graph=st.executeQuery(noti_sql);
+int jan=0,feb=0,mar=0,apr=0,may=0,jun=0,jul=0,aug=0,sep=0,oct=0,nov=0,dec=0;
+String time_db="";
+while(graph.next())
+{
+	if(graph.getString(3).equals(username))
+	{
+		time_db=graph.getString(11);
+		if(time_db.charAt(4)=='J')
+		{
+			if(time_db.charAt(5)=='a')
+			{
+				jan++;
+			}
+			else if(time_db.charAt(5)=='u')
+			{
+				if(time_db.charAt(6)=='n')
+				{
+					jun++;
+				}
+				else
+				{
+					jul++;
+				}
+			}
+			else
+				continue;
+		}
+		else if(time_db.charAt(4)=='F')
+		{
+			feb++;
+		}
+		else if(time_db.charAt(4)=='M')
+		{
+			if(time_db.charAt(5)=='a')
+			{
+				if(time_db.charAt(6)=='r')
+				{
+					mar++;
+				}
+				else
+				{
+					may++;
+				}
+			}
+			else
+				continue;
+		}
+		else if(time_db.charAt(4)=='A')
+		{
+			if(time_db.charAt(5)=='p')
+			{
+				apr++;
+			}
+			else
+			{
+				aug++;
+			}
+		}
+		else if(time_db.charAt(4)=='S')
+		{
+			sep++;
+		}
+		else if(time_db.charAt(4)=='O')
+		{
+			oct++;
+		}
+		else if(time_db.charAt(4)=='N')
+		{
+			nov++;
+		}
+		else if(time_db.charAt(4)=='D')
+		{
+			dec++;
+		}
+		else
+			continue;
+	}
+}
+Gson gsonObj = new Gson();
+Map<Object,Object> map = null;
+List<Map<Object,Object>> list = new ArrayList<Map<Object,Object>>();
+ 
+map = new HashMap<Object,Object>(); map.put("label", "Jan"); map.put("y", jan); list.add(map);
+map = new HashMap<Object,Object>(); map.put("label", "Feb"); map.put("y", feb); list.add(map);
+map = new HashMap<Object,Object>(); map.put("label", "Mar"); map.put("y", mar); list.add(map);
+map = new HashMap<Object,Object>(); map.put("label", "Apr"); map.put("y", apr); list.add(map);
+map = new HashMap<Object,Object>(); map.put("label", "May"); map.put("y", may); list.add(map);
+map = new HashMap<Object,Object>(); map.put("label", "Jun"); map.put("y", jun); list.add(map);
+map = new HashMap<Object,Object>(); map.put("label", "Jul"); map.put("y", jul); list.add(map);
+map = new HashMap<Object,Object>(); map.put("label", "Aug"); map.put("y", aug); list.add(map);
+map = new HashMap<Object,Object>(); map.put("label", "Sep"); map.put("y", sep); list.add(map);
+map = new HashMap<Object,Object>(); map.put("label", "Oct"); map.put("y", oct); list.add(map);
+map = new HashMap<Object,Object>(); map.put("label", "Nov"); map.put("y", nov); list.add(map);
+map = new HashMap<Object,Object>(); map.put("label", "Dec"); map.put("y", dec); list.add(map);
+ 
+String dataPoints = gsonObj.toJson(list);
+%>
 <div id="mygraph" class="graph">
   <div class="graph-content">
-  	<div style="height: 90px;width: 230px;background-color: #00cc44;border-radius:60px;margin-top: 3%;margin-left: 20%;position: absolute;color: white;font-family:Calibri;font-weight:bold;font-size:40px; display: flex;align-items: center;justify-content: center;">423.5 &#8377;</div>
-  	<span style="margin-top: 11%;margin-left: 24%;position: absolute;font-family: Montserrat">Total Earnings</span>
-  	<div style="height: 90px;width: 230px;background-color: orange;border-radius:60px;margin-top: 3%;margin-left: 40%;position: absolute;color: white;font-family:Calibri;font-weight:bold;font-size:40px; display: flex;align-items: center;justify-content: center;">8</div>
+  	<div style="height: 90px;width: 230px;background-color: #00cc44;border-radius:60px;margin-top: 3%;margin-left: 20%;position: absolute;color: white;font-family:Calibri;font-weight:bold;font-size:40px; display: flex;align-items: center;justify-content: center;"><%=inr %> &#8377;</div>
+  	<span style="margin-top: 11%;margin-left: 24%;position: absolute;font-family: Montserrat">Total Send Money</span>
+  	<div style="height: 90px;width: 230px;background-color: orange;border-radius:60px;margin-top: 3%;margin-left: 40%;position: absolute;color: white;font-family:Calibri;font-weight:bold;font-size:40px; display: flex;align-items: center;justify-content: center;"><%=report_count %></div>
   	<span style="margin-top: 11%;margin-left: 44.5%;position: absolute;font-family: Montserrat">Total Reports</span>
-  	<div style="height: 90px;width: 230px;background-color: #ff6699;border-radius:60px;margin-top: 3%;margin-left: 60%;position: absolute;color: white;font-family:Calibri;font-weight:bold;font-size:40px; display: flex;align-items: center;justify-content: center;">5 | 3</div>
+  	<div style="height: 90px;width: 230px;background-color: #ff6699;border-radius:60px;margin-top: 3%;margin-left: 60%;position: absolute;color: white;font-family:Calibri;font-weight:bold;font-size:40px; display: flex;align-items: center;justify-content: center;"><%=accept %> | <%=reject %></div>
   	<span style="margin-top: 11%;margin-left: 63%;position: absolute;font-family: Montserrat">Accepted | Rejected</span>
+  	<div id="chartContainer" style="height: 300px; width: 700px;margin-top:250px;position:absolute;margin-left:22%"></div>
   </div>
 </div>
 <div id="myuser_set" class="user_set">
@@ -492,6 +624,28 @@ function readURL(input) {
 			};
 			reader.readAsDataURL(input.files[0]);
 			}
+	}
+window.onload = function() { 
+	 
+	var chart = new CanvasJS.Chart("chartContainer", {
+		theme: "light2",
+		title: {
+			text: "Crime submission monthly report"
+		},
+		axisX: {
+			title: "Months (2019-20)"
+		},
+		axisY: {
+			title: "Total no. of reports"
+		},
+		data: [{
+			type: "line",
+			yValueFormatString: "#,##0 reports",
+			dataPoints : <%out.print(dataPoints);%>
+		}]
+	});
+	chart.render();
+	 
 	}
 </script>
 <div id="tab">

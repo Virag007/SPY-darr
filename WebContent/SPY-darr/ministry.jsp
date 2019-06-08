@@ -12,6 +12,7 @@
 <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"> 
 <link rel="stylesheet" href="css/user.css">
 <script src="js/jquery-3.2.1.js"></script>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </head>
 <body>
 <div class="header">
@@ -96,15 +97,219 @@ String home_index=request.getParameter("status_ind");
 String home_count=request.getParameter("status_newcount");
 String home_update="UPDATE messages SET support='"+home_count+"' WHERE mmid='"+home_index+"'";
 st.executeUpdate(home_update);
+String sql4="SELECT * FROM messages";
+int report_count=0,accept=0,reject=0;
+double money_bit=0,inr=0;
+ResultSet counter=st.executeQuery(sql4);
+while(counter.next())
+{
+	if(counter.getString(12).equals("0"))
+	{
+		continue;
+	}
+	else
+	{
+		report_count++;
+	}
+}
+ResultSet acc=st.executeQuery(sql4);
+while(acc.next())
+{
+	if(acc.getString(12).equals("0") && acc.getString(8).equals("Accepted"))
+	{
+		accept++;
+	}
+	else if(acc.getString(12).equals("0") && acc.getString(8).equals("Rejected"))
+	{
+		reject++;
+	}
+	else
+		continue;
+}
+ResultSet money=st.executeQuery(sql4);
+while(money.next())
+{
+	if(money.getString(12).equals("0"))
+	{
+		money_bit=money_bit+Double.parseDouble(money.getString(9));
+	}
+}
+inr=Math.round(money_bit*557381.15*100000d)/10000d;
+
+ResultSet graph=st.executeQuery(sql4);
+int jan=0,feb=0,mar=0,apr=0,may=0,jun=0,jul=0,aug=0,sep=0,oct=0,nov=0,dec=0;
+String time_db="";
+while(graph.next())
+{
+	if(graph.getString(12).equals("0"))
+	{
+		continue;
+	}
+	else
+	{
+		time_db=graph.getString(11);
+		if(time_db.charAt(4)=='J')
+		{
+			if(time_db.charAt(5)=='a')
+			{
+				jan++;
+			}
+			else if(time_db.charAt(5)=='u')
+			{
+				if(time_db.charAt(6)=='n')
+				{
+					jun++;
+				}
+				else
+				{
+					jul++;
+				}
+			}
+			else
+				continue;
+		}
+		else if(time_db.charAt(4)=='F')
+		{
+			feb++;
+		}
+		else if(time_db.charAt(4)=='M')
+		{
+			if(time_db.charAt(5)=='a')
+			{
+				if(time_db.charAt(6)=='r')
+				{
+					mar++;
+				}
+				else
+				{
+					may++;
+				}
+			}
+			else
+				continue;
+		}
+		else if(time_db.charAt(4)=='A')
+		{
+			if(time_db.charAt(5)=='p')
+			{
+				apr++;
+			}
+			else
+			{
+				aug++;
+			}
+		}
+		else if(time_db.charAt(4)=='S')
+		{
+			sep++;
+		}
+		else if(time_db.charAt(4)=='O')
+		{
+			oct++;
+		}
+		else if(time_db.charAt(4)=='N')
+		{
+			nov++;
+		}
+		else if(time_db.charAt(4)=='D')
+		{
+			dec++;
+		}
+		else
+			continue;
+
+	}
+}
+
+ResultSet graph1=st.executeQuery(sql4);
+int jan1=0,feb1=0,mar1=0,apr1=0,may1=0,jun1=0,jul1=0,aug1=0,sep1=0,oct1=0,nov1=0,dec1=0;
+String time_db1="";
+while(graph1.next())
+{
+	if(graph1.getString(12).equals("0"))
+	{
+		time_db1=graph1.getString(11);
+		if(time_db1.charAt(4)=='J')
+		{
+			if(time_db1.charAt(5)=='a')
+			{
+				jan1++;
+			}
+			else if(time_db1.charAt(5)=='u')
+			{
+				if(time_db1.charAt(6)=='n')
+				{
+					jun1++;
+				}
+				else
+				{
+					jul1++;
+				}
+			}
+			else
+				continue;
+		}
+		else if(time_db1.charAt(4)=='F')
+		{
+			feb1++;
+		}
+		else if(time_db1.charAt(4)=='M')
+		{
+			if(time_db1.charAt(5)=='a')
+			{
+				if(time_db1.charAt(6)=='r')
+				{
+					mar1++;
+				}
+				else
+				{
+					may1++;
+				}
+			}
+			else
+				continue;
+		}
+		else if(time_db1.charAt(4)=='A')
+		{
+			if(time_db1.charAt(5)=='p')
+			{
+				apr1++;
+			}
+			else
+			{
+				aug1++;
+			}
+		}
+		else if(time_db1.charAt(4)=='S')
+		{
+			sep1++;
+		}
+		else if(time_db1.charAt(4)=='O')
+		{
+			oct1++;
+		}
+		else if(time_db1.charAt(4)=='N')
+		{
+			nov1++;
+		}
+		else if(time_db1.charAt(4)=='D')
+		{
+			dec1++;
+		}
+		else
+			continue;
+	}
+}
 %>
 <div id="mygraph" class="graph">
   <div class="graph-content">
-  	<div style="height: 90px;width: 230px;background-color: #00cc44;border-radius:60px;margin-top: 3%;margin-left: 20%;position: absolute;color: white;font-family:Calibri;font-weight:bold;font-size:40px; display: flex;align-items: center;justify-content: center;">423.5 &#8377;</div>
-  	<span style="margin-top: 11%;margin-left: 24%;position: absolute;font-family: Montserrat">Total Earnings</span>
-  	<div style="height: 90px;width: 230px;background-color: orange;border-radius:60px;margin-top: 3%;margin-left: 40%;position: absolute;color: white;font-family:Calibri;font-weight:bold;font-size:40px; display: flex;align-items: center;justify-content: center;">8</div>
+  	<div style="height: 90px;width: 230px;background-color: #00cc44;border-radius:60px;margin-top: 3%;margin-left: 20%;position: absolute;color: white;font-family:Calibri;font-weight:bold;font-size:40px; display: flex;align-items: center;justify-content: center;"><%=inr %> &#8377;</div>
+  	<span style="margin-top: 11%;margin-left: 24%;position: absolute;font-family: Montserrat">Total Expenditure</span>
+  	<div style="height: 90px;width: 230px;background-color: orange;border-radius:60px;margin-top: 3%;margin-left: 40%;position: absolute;color: white;font-family:Calibri;font-weight:bold;font-size:40px; display: flex;align-items: center;justify-content: center;"><%=report_count %></div>
   	<span style="margin-top: 11%;margin-left: 44.5%;position: absolute;font-family: Montserrat">Total Reports</span>
-  	<div style="height: 90px;width: 230px;background-color: #ff6699;border-radius:60px;margin-top: 3%;margin-left: 60%;position: absolute;color: white;font-family:Calibri;font-weight:bold;font-size:40px; display: flex;align-items: center;justify-content: center;">5 | 3</div>
+  	<div style="height: 90px;width: 230px;background-color: #ff6699;border-radius:60px;margin-top: 3%;margin-left: 60%;position: absolute;color: white;font-family:Calibri;font-weight:bold;font-size:40px; display: flex;align-items: center;justify-content: center;"><%=accept %> | <%=reject %></div>
   	<span style="margin-top: 11%;margin-left: 63%;position: absolute;font-family: Montserrat">Accepted | Rejected</span>
+  	<div id="chartContainer" style="height: 300px; width: 700px;margin-top:250px;margin-left:23%;position:absolute"></div>
   </div>
 </div>
 <div id="myuser_set" class="user_set">
@@ -342,6 +547,62 @@ function readURL(input) {
 			reader.readAsDataURL(input.files[0]);
 			}
 	}
+window.onload = function () {
+    var chart = new CanvasJS.Chart("chartContainer",
+    {
+    	theme: "light2",
+    	title:{
+        text: "A Combination of Police (Line) & Informer (Bar) Chart"
+      
+      }, 
+      axisX: {
+			title: "Months (2019-20)"
+		},
+	  axisY: {
+			title: "Total no. of reports"
+		},
+      data: [{        
+        type: "column",
+        yValueFormatString: "#,##0 reports",
+        dataPoints: [
+        { label: "Jan", y: <%=jan1%> },
+        { label: "Feb", y: <%=feb1%> },
+        { label: "Mar", y: <%=mar1%> },
+        { label: "Apr", y: <%=apr1%> },
+        { label: "May", y: <%=may1%> },
+        { label: "Jun", y: <%=jun1%> },
+        { label: "Jul", y: <%=jul1%> },
+        { label: "Aug", y: <%=aug1%> },
+        { label: "Sep", y: <%=sep1%> },
+        { label: "Oct", y: <%=oct1%> },
+        { label: "Nov", y: <%=nov1%> },
+        { label: "Dec", y: <%=dec1%> },
+        ]
+      },
+      {        
+        type: "line",
+        yValueFormatString: "#,##0 reports",
+        dataPoints: [
+        { label: "Jan", y: <%=jan%> },
+        { label: "Feb", y: <%=feb%>},
+        { label: "Mar", y: <%=mar%> },
+        { label: "Apr", y: <%=apr%> },
+        { label: "May", y: <%=may%> },
+        { label: "Jun", y: <%=jun%> },
+        { label: "Jul", y: <%=jul%> },
+        { label: "Aug", y: <%=aug%> },
+        { label: "Sep", y: <%=sep%> },
+        { label: "Oct", y: <%=oct%> },
+        { label: "Nov", y: <%=nov%> },
+        { label: "Dec", y: <%=dec%> },
+        ]
+      }
+        
+      ]
+    });
+
+    chart.render();
+  }
 </script>
 <div id="tab">
 	<img class="drawer" style="filter: invert(100%);background-color: #bfbfbf" src="icons/menu.svg" onclick="openside()">

@@ -14,5 +14,6 @@
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/mysql-connector-java-5.1.47-bin.jar"/>
+	<classpathentry kind="lib" path="C:/Users/hp/workspace/SPY-darr/WebContent/WEB-INF/lib/gson-2.6.2.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

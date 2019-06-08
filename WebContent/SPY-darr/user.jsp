@@ -5,6 +5,8 @@
 <%@page import="java.sql.*" %>
 <%@page import="java.lang.*" %>
 <%@ page import="java.util.*" %>
+<%@ page import="com.google.gson.Gson"%>
+<%@ page import="com.google.gson.JsonObject"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,6 +16,7 @@
 <link rel="stylesheet" href="css/user.css">
 <script src="js/jquery-3.2.1.js"></script>
 <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 </head>
 <body>
 <div class="header">
@@ -301,6 +304,7 @@ st.executeUpdate(home_update);
 	String[] rec_from_u=new String[50];
 	String[] noti_time_u=new String[50];
 	String[] coins_u=new String[50];
+	String[] mmid_p=new String[50];
  	String noti_sql="SELECT * FROM messages";
  	String style="none";
  	String display="none";
@@ -315,6 +319,7 @@ st.executeUpdate(home_update);
  		{
  			veiw_u[j]="block";
  			coins_u[j]=rst.getString(9);
+ 			mmid_p[j]=rst.getString(1);
  			msg_u[j]=rst.getString(4);
 			location_u[j]=rst.getString(5);
 			rec_from_u[j]=rst.getString(2);
@@ -358,8 +363,14 @@ st.executeUpdate(home_update);
 	  	String check=request.getParameter("check"); 
 	  	if(check==null){}
 	  	else {
-		  	String query="UPDATE messages SET view='Seen' WHERE to_user='"+username+"'";
+	  		String query="UPDATE messages SET view='Seen' WHERE mmid='"+mmid_p[0]+"'";
+		  	String query_p="UPDATE messages SET view='Seen' WHERE mmid='"+mmid_p[1]+"'";
+		  	String query_p1="UPDATE messages SET view='Seen' WHERE mmid='"+mmid_p[2]+"'";
+		  	String query_p2="UPDATE messages SET view='Seen' WHERE mmid='"+mmid_p[3]+"'";
  			st.executeUpdate(query);
+ 			st.executeUpdate(query_p);
+ 			st.executeUpdate(query_p1);
+ 			st.executeUpdate(query_p2);
  			%> 
 		  	<script>
 		  	document.getElementById("mynotification").style.width = "100%";
@@ -369,6 +380,105 @@ st.executeUpdate(home_update);
 	  	%>
   </div>
 </div>
+<%
+ResultSet graph=st.executeQuery(sql4);
+int jan=0,feb=0,mar=0,apr=0,may=0,jun=0,jul=0,aug=0,sep=0,oct=0,nov=0,dec=0;
+String time_db="";
+while(graph.next())
+{
+	if(graph.getString(2).equals(username))
+	{
+		time_db=graph.getString(11);
+		if(time_db.charAt(4)=='J')
+		{
+			if(time_db.charAt(5)=='a')
+			{
+				jan++;
+			}
+			else if(time_db.charAt(5)=='u')
+			{
+				if(time_db.charAt(6)=='n')
+				{
+					jun++;
+				}
+				else
+				{
+					jul++;
+				}
+			}
+			else
+				continue;
+		}
+		else if(time_db.charAt(4)=='F')
+		{
+			feb++;
+		}
+		else if(time_db.charAt(4)=='M')
+		{
+			if(time_db.charAt(5)=='a')
+			{
+				if(time_db.charAt(6)=='r')
+				{
+					mar++;
+				}
+				else
+				{
+					may++;
+				}
+			}
+			else
+				continue;
+		}
+		else if(time_db.charAt(4)=='A')
+		{
+			if(time_db.charAt(5)=='p')
+			{
+				apr++;
+			}
+			else
+			{
+				aug++;
+			}
+		}
+		else if(time_db.charAt(4)=='S')
+		{
+			sep++;
+		}
+		else if(time_db.charAt(4)=='O')
+		{
+			oct++;
+		}
+		else if(time_db.charAt(4)=='N')
+		{
+			nov++;
+		}
+		else if(time_db.charAt(4)=='D')
+		{
+			dec++;
+		}
+		else
+			continue;
+	}
+}
+Gson gsonObj = new Gson();
+Map<Object,Object> map = null;
+List<Map<Object,Object>> list = new ArrayList<Map<Object,Object>>();
+ 
+map = new HashMap<Object,Object>(); map.put("label", "Jan"); map.put("y", jan); list.add(map);
+map = new HashMap<Object,Object>(); map.put("label", "Feb"); map.put("y", feb); list.add(map);
+map = new HashMap<Object,Object>(); map.put("label", "Mar"); map.put("y", mar); list.add(map);
+map = new HashMap<Object,Object>(); map.put("label", "Apr"); map.put("y", apr); list.add(map);
+map = new HashMap<Object,Object>(); map.put("label", "May"); map.put("y", may); list.add(map);
+map = new HashMap<Object,Object>(); map.put("label", "Jun"); map.put("y", jun); list.add(map);
+map = new HashMap<Object,Object>(); map.put("label", "Jul"); map.put("y", jul); list.add(map);
+map = new HashMap<Object,Object>(); map.put("label", "Aug"); map.put("y", aug); list.add(map);
+map = new HashMap<Object,Object>(); map.put("label", "Sep"); map.put("y", sep); list.add(map);
+map = new HashMap<Object,Object>(); map.put("label", "Oct"); map.put("y", oct); list.add(map);
+map = new HashMap<Object,Object>(); map.put("label", "Nov"); map.put("y", nov); list.add(map);
+map = new HashMap<Object,Object>(); map.put("label", "Dec"); map.put("y", dec); list.add(map);
+ 
+String dataPoints = gsonObj.toJson(list);
+%>
 <div id="mygraph" class="graph">
   <div class="graph-content">
   <%
@@ -377,7 +487,7 @@ st.executeUpdate(home_update);
   ResultSet rs2=st.executeQuery(sql2);
   while(rs2.next())
 	{
-		if(rs2.getString(3).equals(username) && rs2.getString(8).equals("Not Accepted"))
+		if(rs2.getString(3).equals(username) && rs2.getString(8).equals("Rejected"))
 		{
 			rejected++;
 			c++;
@@ -397,6 +507,7 @@ st.executeUpdate(home_update);
   	<span style="margin-top: 11%;margin-left: 44.5%;position: absolute;font-family: Montserrat">Total Reports</span>
   	<div style="height: 90px;width: 230px;background-color: #ff6699;border-radius:60px;margin-top: 3%;margin-left: 60%;position: absolute;color: white;font-family:Calibri;font-weight:bold;font-size:40px; display: flex;align-items: center;justify-content: center;"><%=accepted %> | <%=rejected %></div>
   	<span style="margin-top: 11%;margin-left: 63%;position: absolute;font-family: Montserrat">Accepted | Rejected</span>
+  	<div id="chartContainer" style="height: 300px; width: 700px;margin-top:250px;position:absolute;margin-left:22%"></div>
   </div>
 </div>
 <div id="mybitcoin" class="bitcoin">
@@ -900,6 +1011,28 @@ function handleFileSelect(e) {
 		selDiv.innerHTML +="&#9670;&nbsp;" + f.name + "<br/>";
 		}			
 }
+window.onload = function() { 
+	 
+	var chart = new CanvasJS.Chart("chartContainer", {
+		theme: "light2",
+		title: {
+			text: "Crime submission monthly report"
+		},
+		axisX: {
+			title: "Months (2019-20)"
+		},
+		axisY: {
+			title: "Total no. of reports"
+		},
+		data: [{
+			type: "line",
+			yValueFormatString: "#,##0 reports",
+			dataPoints : <%out.print(dataPoints);%>
+		}]
+	});
+	chart.render();
+	 
+	}
 </script>
 <div id="tab">
 	<img class="drawer" style="filter: invert(100%);background-color: #bfbfbf" src="icons/menu.svg" onclick="openside()">
